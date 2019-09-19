@@ -10,8 +10,7 @@ public class FindPatternInDir {
     private File[] files;
     private List<Path> pathList;
 
-    public FindPatternInDir(String pattern, String directory) {
-        this.pattern = pattern;
+    public FindPatternInDir(String directory) {
         this.pathList = new ArrayList<>();
         files = new File(directory).listFiles();
     }
@@ -33,5 +32,11 @@ public class FindPatternInDir {
     public List<Path> getFiles(){
         return this.findAllFiles(files);
     }
+
+    public void setPattern(String pattern){
+        this.pattern = pattern;
+    }
+
+
 
 }

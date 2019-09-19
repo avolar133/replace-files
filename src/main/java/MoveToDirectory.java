@@ -18,7 +18,8 @@ public class MoveToDirectory {
     public void copyToAnotherDirectory(Path originalPath){
         File file = new File(originalPath.toString());
         System.out.println(file.exists());
-
+        System.out.println(file);
+        System.out.println(pathTarget);
         try {
             Files.copy(originalPath,
                     Paths.get(pathTarget + "/"+ FilenameUtils.getName(originalPath.toString()) ),
@@ -37,8 +38,17 @@ public class MoveToDirectory {
                     Paths.get(pathTarget + "/"+ FilenameUtils.getName(originalPath.toString()) ),
                     StandardCopyOption.REPLACE_EXISTING);
         }catch (IOException e){
-            System.out.println(e);
+            System.err.println(e);
         }
 
+    }
+
+    public boolean pathExists(){
+        File file = new File(pathTarget.toString());
+        if(file.exists() && file.isDirectory()){
+            return true;
+        }else {
+            return false;
+        }
     }
 }
