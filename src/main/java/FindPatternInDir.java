@@ -8,35 +8,30 @@ public class FindPatternInDir {
     private String pattern;
     //private String directory;
     private File[] files;
+    private List<Path> pathList;
 
     public FindPatternInDir(String pattern, String directory) {
         this.pattern = pattern;
+        this.pathList = new ArrayList<>();
         files = new File(directory).listFiles();
-        findAllFiles(files, pattern);
     }
 
-    private void showFiles(File[] files){
-        for (File file : files){
+
+    private List<Path> findAllFiles(File[] allFiles ){
+
+        for (File file : allFiles){
             if (file.isDirectory()){
-                System.out.println("Directory : " + file.getName());
-                showFiles(file.listFiles());
-            }else{
-                System.out.println("File : " + file.getName());
-            }
-        }
-    }
-
-    private List<Path> findAllFiles(File[] files , String fileName){
-
-        List<Path> pathList = new ArrayList<>();
-
-        for (File file : files){
-            if (file.isDirectory()){
-                findAllFiles(file.listFiles() , fileName);
-            }else if (file.getName().equals(fileName)){
+                findAllFiles(file.listFiles() );
+            }else if (file.getName().equals(pattern)){
                 pathList.add(file.toPath());
             }
         }
         return pathList;
     }
+
+
+    public List<Path> getFiles(){
+        return this.findAllFiles(files);
+    }
+
 }
